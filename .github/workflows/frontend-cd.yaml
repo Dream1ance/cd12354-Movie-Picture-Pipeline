@@ -10,7 +10,7 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   ECR_REPOSITORY: frontend
   EKS_CLUSTER_NAME: cluster
-  MOVIE_API_URL: http://ade4733d3b753453dae4a4db272d24a1-1468934168.us-east-1.elb.amazonaws.com
+  REACT_APP_MOVIE_API_URL: ${{ vars.REACT_APP_MOVIE_API_URL }}
 
 jobs:
   lint:
@@ -87,7 +87,7 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           docker build \
-            --build-arg REACT_APP_MOVIE_API_URL=$MOVIE_API_URL \
+            --build-arg REACT_APP_MOVIE_API_URL=${{ env.REACT_APP_MOVIE_API_URL }} \
             -t $REGISTRY/$ECR_REPOSITORY:${{ github.sha }} .
           docker tag \
             $REGISTRY/$ECR_REPOSITORY:${{ github.sha }} \

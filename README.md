@@ -469,3 +469,12 @@ kustomize build | kubectl apply -f -
 ## License
 
 [License](LICENSE.md)
+
+
+## Deployment URLs
+
+### Frontend
+http://a1df971f3c3a24f7fb6fc303a9f4c869-2145298801.us-east-1.elb.amazonaws.com
+
+### Backend API
+http://ade4733d3b753453dae4a4db272d24a1-1468934168.us-east-1.elb.amazonaws.com/movies
