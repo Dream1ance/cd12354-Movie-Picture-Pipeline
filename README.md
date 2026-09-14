@@ -471,10 +471,51 @@ kustomize build | kubectl apply -f -
 [License](LICENSE.md)
 
 
-## Deployment URLs
+## Deployment Verification
 
-### Frontend
-http://a1df971f3c3a24f7fb6fc303a9f4c869-2145298801.us-east-1.elb.amazonaws.com
+### Repository
 
-### Backend API
-http://ade4733d3b753453dae4a4db272d24a1-1468934168.us-east-1.elb.amazonaws.com/movies
+GitHub Repository:
+https://github.com/Dream1ance/cd12354-Movie-Picture-Pipeline
+
+### Latest Successful Deployment Runs
+
+Frontend Continuous Deployment:
+https://github.com/Dream1ance/cd12354-Movie-Picture-Pipeline/actions/runs/34833053088
+
+Backend Continuous Deployment:
+https://github.com/Dream1ance/cd12354-Movie-Picture-Pipeline/actions/runs/34832625228
+
+### Kubernetes Deployment
+
+The frontend and backend applications are deployed to the Amazon EKS cluster.
+
+Both applications were successfully deployed using the GitHub Actions continuous deployment workflows.
+
+### Backend API Verification
+
+The backend application was verified from the running Kubernetes pod using port forwarding.
+
+Endpoint:
+
+http://localhost:5000/movies
+
+The endpoint returned the expected movie data:
+
+```json
+{
+  "movies": [
+    {
+      "id": "123",
+      "title": "Top Gun: Maverick"
+    },
+    {
+      "id": "456",
+      "title": "Sonic the Hedgehog"
+    },
+    {
+      "id": "789",
+      "title": "A Quiet Place"
+    }
+  ]
+}
