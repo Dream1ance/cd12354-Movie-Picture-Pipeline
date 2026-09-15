@@ -124,7 +124,9 @@ jobs:
 
       - name: Wait for backend rollout
         run: |
-          kubectl rollout status deployment/backend --timeout=10m
+           kubectl describe deployment backend
+           kubectl get events --sort-by='.lastTimestamp'
+           kubectl rollout status deployment/backend --timeout=10m
 
       - name: Verify backend deployment
         run: |
