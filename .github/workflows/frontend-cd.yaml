@@ -82,11 +82,12 @@ jobs:
             --build-arg REACT_APP_MOVIE_API_URL=$REACT_APP_MOVIE_API_URL \
             --tag $ECR_REGISTRY/frontend:${{ github.sha }} \
             .
-            - name: Push Docker image
-              env:
-                ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-              run: |
-                docker push $ECR_REGISTRY/frontend:${{ github.sha }}
+
+      - name: Push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker push $ECR_REGISTRY/frontend:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
