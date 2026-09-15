@@ -1,9 +1,12 @@
-﻿name: Backend Continuous Integration
+name: Backend Continuous Integration
 
 on:
   pull_request:
     branches:
       - main
+    paths:
+      - "starter/backend/**"
+      - ".github/workflows/backend-ci.yaml"
   workflow_dispatch:
 
 jobs:
