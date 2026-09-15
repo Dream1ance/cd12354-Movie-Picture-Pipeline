@@ -114,11 +114,13 @@ jobs:
         working-directory: starter/backend/k8s
         run: |
           kustomize edit set image backend=505075467242.dkr.ecr.us-east-1.amazonaws.com/backend:${{ github.sha }}
+          echo "Rendered backend image:"
+          kustomize build . | grep "image:"
 
       - name: Deploy backend
         working-directory: starter/backend/k8s
         run: |
-          kustomize build | kubectl apply -f -
+          kustomize build . | kubectl apply -f -
 
       - name: Wait for backend rollout
         run: |
