@@ -1,4 +1,4 @@
-name: Frontend Continuous Deployment
+﻿name: Frontend Continuous Deployment
 
 on:
   push:
@@ -76,17 +76,17 @@ jobs:
         working-directory: starter/frontend
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REACT_APP_MOVIE_API_URL: ${{ secrets.REACT_APP_MOVIE_API_URL }}
         run: |
           docker build \
-            --build-arg REACT_APP_MOVIE_API_URL=${{ secrets.REACT_APP_MOVIE_API_URL }} \
+            --build-arg REACT_APP_MOVIE_API_URL=$REACT_APP_MOVIE_API_URL \
             --tag $ECR_REGISTRY/frontend:${{ github.sha }} \
             .
-
-      - name: Push Docker image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          docker push $ECR_REGISTRY/frontend:${{ github.sha }}
+            - name: Push Docker image
+              env:
+                ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+              run: |
+                docker push $ECR_REGISTRY/frontend:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
