@@ -71,6 +71,17 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+        
+      - name: Check API URL
+        env:
+          REACT_APP_MOVIE_API_URL: ${{ secrets.REACT_APP_MOVIE_API_URL }}
+        run: |
+          if [ -z "$REACT_APP_MOVIE_API_URL" ]; then
+            echo "API URL is EMPTY"
+            exit 1
+          else
+            echo "API URL is SET"
+          fi
 
       - name: Build Docker image
         working-directory: starter/frontend
